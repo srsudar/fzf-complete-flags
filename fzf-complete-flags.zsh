@@ -19,10 +19,10 @@ _find_flags() {
   # $1 is passed to the function and should be the command.
   local match_prefix=$1
   fc -rl 1 | \
-    # strip leading command number and trailing slashes. Trailing slashes
-    # somehow confuse fzf or the do while. We use -E for portability with both
-    # mac and unix.
-      sed -E -e 's/^[[:space:]]*[0-9]*\*?[[:space:]]*//' -e 's/\\+$//' | \
+    # strip leading command number and trailing slashes. Trailing slashes (or
+    # trailing slash then spaces) somehow confuse fzf or the do while. We use -E
+    # for portability with both mac and unix.
+      sed -E -e 's/^[[:space:]]*[0-9]*\*?[[:space:]]*//' -e 's/\\+[[:space:]]$//' | \
       rg "^${match_prefix}" --color=never --no-line-number |
 # Use gawk rather than awk here for portability. On mac this requires you to
 # first install gawk, eg `brew install gawk`.
@@ -107,7 +107,14 @@ gawk -v match_prefix=${match_prefix} ' { for (i = 1; i <= NF; i++) {
 
 # CTRL-Q - Paste the selected flags into the command line. Copied from CTRL-T
 # bindings shown here:
-# https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
+#
+#     https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
+#
+# Note that normally `<c-q>` is bound to the command to break scroll lock, which
+# you've maybe accidentally enabled at some point via `<c-s>` and frozen your
+# terminal. I bound `<c-q>` because I've disabled `<c-s>` in my zshrc using:
+#
+#     stty -ixon
 __flagsel() {
   # Normally, BUFFER is adequate. However, if we're in a line continutation, as
   # indicated by CONTEXT=cont, we want PREBUFFER:
