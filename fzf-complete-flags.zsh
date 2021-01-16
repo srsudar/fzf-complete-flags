@@ -22,7 +22,7 @@ _find_flags() {
     # strip leading command number and trailing slashes. Trailing slashes (or
     # trailing slash then spaces) somehow confuse fzf or the do while. We use -E
     # for portability with both mac and unix.
-      sed -E -e 's/^[[:space:]]*[0-9]*\*?[[:space:]]*//' -e 's/\\+[[:space:]]$//' | \
+      sed -E -e 's/^[[:space:]]*[0-9]*\*?[[:space:]]*//' -e 's/\\+[[:space:]]*$//' | \
       rg "^${match_prefix}" --color=never --no-line-number |
 # Use gawk rather than awk here for portability. On mac this requires you to
 # first install gawk, eg `brew install gawk`.
