@@ -6,6 +6,8 @@ I originally had this as a
 it will be easier for people to submit improvements via pull requests to a full
 repo.
 
+[![demo](https://asciinema.org/a/384954.svg)](https://asciinema.org/a/384954)
+
 ## Installation
 
 You'll need to source the `fzf-complete-flags.zsh` file. I have this block in my
