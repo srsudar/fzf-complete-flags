@@ -23,7 +23,8 @@ else
 fi
 ```
 
-It assumes that you have `gawk` installed and on your path.
+It assumes that you have `gawk` and `rg` (i.e.
+[`ripgrep`](https://github.com/BurntSushi/ripgrep)) installed and on your path.
 
 Also, normally `<c-q>` is already bound to a command. It is the counterpart to
 `<c-s>`, which I wouldn't be surprised if at some point you've accidentally
